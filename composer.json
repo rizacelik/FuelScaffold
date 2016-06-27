@@ -1,5 +1,5 @@
 {
-  "name": "fuelcreate/ccaffold",
+  "name": "fuelcreate/scaffold",
   "description": "FuelPHP Scaffold Generator",
   "keywords": ["generators", "FuelPHP", "scaffold"],
   "license": "MIT",
