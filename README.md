@@ -71,3 +71,72 @@ C:\xampp\htdocs\fuelphp\fuel\app\views\posts\_form.php
 C:\xampp\htdocs\fuelphp>
 ```
 
+#Example Relation Model Class
+
+
+```
+<?php
+
+class Model_Posts extends \Orm\Model
+{
+
+	protected static $_properties = array(
+           'id',
+           'title',
+           'content',
+           'comment_allow',
+           'post_date',
+	);
+
+	protected static $_table_name = 'posts';
+
+	public static function validate($factory)
+	{
+	   $val = Validation::forge($factory);
+           $val->add_field('title','Title','required|max_length[255]');
+           $val->add_field('content','Content','required');
+           $val->add_field('comment_allow','Comment Allow','required|valid_string[numeric]');
+           $val->add_field('post_date','Post Date','required|valid_date[Y-m-d H:i:s]');
+
+	       return $val;
+	}
+
+    protected static $_has_many = array (
+         'postscategories' =>  array (
+               'key_from' => 'id',
+               'model_to' => 'Model_Postscategories',
+               'key_to' => 'posts_id',
+         ),
+         'postscomments' =>  array (
+               'key_from' => 'id',
+               'model_to' => 'Model_Postscomments',
+               'key_to' => 'posts_id',
+         ),
+         'postslikes' =>  array (
+               'key_from' => 'id',
+               'model_to' => 'Model_Postslikes',
+               'key_to' => 'posts_id',
+         ),
+         'poststags' =>  array (
+               'key_from' => 'id',
+               'model_to' => 'Model_Poststags',
+               'key_to' => 'posts_id',
+         ),
+         'postsusers' =>  array (
+               'key_from' => 'id',
+               'model_to' => 'Model_Postsusers',
+               'key_to' => 'posts_id',
+         ),
+       );
+
+       
+}
+
+```
+
+
+## Scaffold
+![image](http://i66.tinypic.com/be79h.png)
+![image](http://i64.tinypic.com/2rdi4xw.png)
+
+
