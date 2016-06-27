@@ -92,7 +92,7 @@ class Model_Posts extends \Orm\Model
 
 	public static function validate($factory)
 	{
-	     $val = Validation::forge($factory);
+           $val = Validation::forge($factory);
            $val->add_field('title','Title','required|max_length[255]');
            $val->add_field('content','Content','required');
            $val->add_field('comment_allow','Comment Allow','required|valid_string[numeric]');
