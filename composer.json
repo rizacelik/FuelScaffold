@@ -1,0 +1,19 @@
+{
+  "name": "fuelcreate/ccaffold",
+  "description": "FuelPHP Scaffold Generator",
+  "keywords": ["generators", "FuelPHP", "scaffold"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Rıza Çelik",
+      "email": "rizacelik@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Fuelcreate\\Scaffold\\": "src/"
+    }
+  },
+  "version"  :  "1.0.0" , 
+  "minimum-stability" :  "dev"
+}
