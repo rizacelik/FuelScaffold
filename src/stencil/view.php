@@ -15,5 +15,6 @@ $content .= <<<EOT
 	<?= Html::anchor('$app_name', 'Back');?>
 </p>
 EOT;
+
 return $content;
 ?>
