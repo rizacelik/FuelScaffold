@@ -14,7 +14,9 @@ composer require fuelcreate/scaffold:"dev-master"
 ### Step 2: Creating a task
 
 
-In Fuel Tasks are put in the `fuel/app/tasks` directory. Below is an example of the task "`Scaffolds`":
+In Fuel Tasks are put in the `fuel/app/tasks` directory. Below is an example of the task "`scaffolds`":
+
+`fuel/app/tasks/scaffolds.php`
 
 ```
 <?php 
