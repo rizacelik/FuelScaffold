@@ -4,7 +4,7 @@ namespace Fuelcreate\Scaffold;
 trait Scaffold
 {
     use Relation;
-	use CreateBuilder;
+    use CreateBuilder;
     
     /**
      * Execute the console command.
@@ -14,17 +14,17 @@ trait Scaffold
     public function fire()
     {
 
-		$found_tables = $this->relate();
-		if (count($found_tables) == 0) {
+	$found_tables = $this->relate();
+	if (count($found_tables) == 0) {
             \Cli::write('Database not found tables. Please; before scaffolding, create table or tables.');
             return false;
         }
 		
         echo PHP_EOL;
-		\Cli::write(str_repeat("=", 50), 'blue');
+	\Cli::write(str_repeat("=", 50), 'blue');
         \Cli::write('Found ' . count($found_tables) . ' database tables to generate scaffold for.', 'green');
-		\Cli::write(str_repeat("=", 50), 'blue');
-		echo PHP_EOL;
+	\Cli::write(str_repeat("=", 50), 'blue');
+	echo PHP_EOL;
         
         $answer = \Cli::prompt('Generate all controller, model and views?', array( 'y', 'n' ));
 		
@@ -44,7 +44,7 @@ trait Scaffold
 		
         $this->_create($this->hasmany);
         $this->_create($this->belongsto, '_belongs_to', false);
-		$this->_create($this->noRelate(), false);
+	$this->_create($this->noRelate(), false);
         
     }
     
