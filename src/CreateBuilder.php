@@ -5,7 +5,7 @@ namespace Fuelcreate\Scaffold;
 trait CreateBuilder
 {
     
-	public $backup = true;
+    public $backup = true;
     
     public function _create($relation, $relate = '_has_many', $has = true)
     {
@@ -69,42 +69,42 @@ trait CreateBuilder
                 $properties[] = $info['COLUMN_NAME'];
             }
             
-            $app_name = str_replace('_', '', strtolower($key));
-			$model = ucfirst($app_name);
-            $id  = $properties[0];
+             $app_name = str_replace('_', '', strtolower($key));
+	     $model = ucfirst($app_name);
+             $id  = $properties[0];
 			
- 			    if ($relate == false) {
-                    $expCode = '';
-                } else {
-                    $expCode = isset($this->example[$i]) ? $this->example[$i] : '';
-                }
+             if ($relate == false) {
+                $expCode = '';
+             } else {
+                $expCode = isset($this->example[$i]) ? $this->example[$i] : '';
+             }
 				
             
             if ($has) {
-			    $content = include(__DIR__ . DIRECTORY_SEPARATOR . 'stencil' . DIRECTORY_SEPARATOR . 'create.php');				
+	        $content = include(__DIR__ . DIRECTORY_SEPARATOR . 'stencil' . DIRECTORY_SEPARATOR . 'create.php');				
                 $this->makeFile('views', $app_name, 'create', $content);
-				$content = include(__DIR__ . DIRECTORY_SEPARATOR . 'stencil' . DIRECTORY_SEPARATOR . 'edit.php');
-				$this->makeFile('views', $app_name, 'edit', $content);
-				$content = include(__DIR__ . DIRECTORY_SEPARATOR . 'stencil' . DIRECTORY_SEPARATOR . 'view.php');
-				$this->makeFile('views', $app_name, 'view', $content, $this->backup);
-				$content = include(__DIR__ . DIRECTORY_SEPARATOR . 'stencil' . DIRECTORY_SEPARATOR . 'index.php');
-				$this->makeFile('views', $app_name, 'index', $content, $this->backup);
-				$content = include(__DIR__ . DIRECTORY_SEPARATOR . 'stencil' . DIRECTORY_SEPARATOR . '_form.php');
-				$this->makeFile('views', $app_name, '_form', $content, $this->backup);
-				$content = include(__DIR__ . DIRECTORY_SEPARATOR . 'stencil' . DIRECTORY_SEPARATOR . 'controller.php');
-				$this->makeFile('classes', 'controller', $app_name, $content, $this->backup);
+		$content = include(__DIR__ . DIRECTORY_SEPARATOR . 'stencil' . DIRECTORY_SEPARATOR . 'edit.php');
+		$this->makeFile('views', $app_name, 'edit', $content);
+		$content = include(__DIR__ . DIRECTORY_SEPARATOR . 'stencil' . DIRECTORY_SEPARATOR . 'view.php');
+		$this->makeFile('views', $app_name, 'view', $content, $this->backup);
+		$content = include(__DIR__ . DIRECTORY_SEPARATOR . 'stencil' . DIRECTORY_SEPARATOR . 'index.php');
+		$this->makeFile('views', $app_name, 'index', $content, $this->backup);
+		$content = include(__DIR__ . DIRECTORY_SEPARATOR . 'stencil' . DIRECTORY_SEPARATOR . '_form.php');
+		$this->makeFile('views', $app_name, '_form', $content, $this->backup);
+		$content = include(__DIR__ . DIRECTORY_SEPARATOR . 'stencil' . DIRECTORY_SEPARATOR . 'controller.php');
+		$this->makeFile('classes', 'controller', $app_name, $content, $this->backup);
             }
 			
-			if ($relate) {
-				$related = 'protected static $' . $relate . ' = ' . var_export($relation[$key], true) . ';' . PHP_EOL;
-				$related = str_replace("=> \n", '=>', $related);
-				$related = str_replace('    ', '        ', $related);
-				$related = str_replace("\n", PHP_EOL . '       ', $related);
-			} else {
-				$related = '';
-			}
+	    if ($relate) {
+		$related = 'protected static $' . $relate . ' = ' . var_export($relation[$key], true) . ';' . PHP_EOL;
+		$related = str_replace("=> \n", '=>', $related);
+		$related = str_replace('    ', '        ', $related);
+		$related = str_replace("\n", PHP_EOL . '       ', $related);
+	    } else {
+		$related = '';
+	    }
 			
-			$content = include(__DIR__ . DIRECTORY_SEPARATOR . 'stencil' . DIRECTORY_SEPARATOR . 'model.php');
+	    $content = include(__DIR__ . DIRECTORY_SEPARATOR . 'stencil' . DIRECTORY_SEPARATOR . 'model.php');
             $this->makeFile('classes', 'model', $app_name, $content, $this->backup);
             $i++;
         }
@@ -116,16 +116,16 @@ trait CreateBuilder
         $file = APPPATH . $dir . DS . $model . DS . $file . '.php';
         if (file_exists($file) && $backup == true) {
             if (file_exists($file . '~')) {
-			  for($i = 1; $i <= 10; $i++){
-			    if (!file_exists($file . '~' . $i)) {
-                   rename($file, $file . '~' . $i);
-				   echo 'File Backup: ' . $file . '~' . $i . PHP_EOL;
-				   break;
-				}
-			  }
+		for($i = 1; $i <= 10; $i++){
+		    if (!file_exists($file . '~' . $i)) {
+                        rename($file, $file . '~' . $i);
+		        echo 'File Backup: ' . $file . '~' . $i . PHP_EOL;
+			break;
+		    }
+		}
             } else {
                 rename($file, $file . '~');
-				echo 'File Backup: ' . $file . '~' . PHP_EOL;
+		echo 'File Backup: ' . $file . '~' . PHP_EOL;
             }
             
         }
