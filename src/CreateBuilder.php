@@ -23,7 +23,7 @@ trait CreateBuilder
                     $rule = array();
                     $forms .= "\t\t<div class=\"form-group\"><?= Form::label('" . ucwords(str_replace('_', ' ', $info['COLUMN_NAME'])) . "', '{$info['COLUMN_NAME']}', array('class'=>'control-label')); ?>" . PHP_EOL;
                     
-                    $required = '';
+                    $required = "''";
                     if ($info['IS_NULLABLE'] == 'NO') {
                         $rule[]   = 'required';
                         $required = "'required' => 'required'";
