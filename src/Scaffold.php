@@ -14,15 +14,17 @@ trait Scaffold
     public function fire()
     {
 
-	$found_tables = $this->relate();
-	if (count($found_tables) == 0) {
+	$found_tables  = count($this->relate());
+	$found_tables2 = count($this->noRelate());
+	if ($found_tables == 0 && $found_tables2 == 0) {
             \Cli::write('Database not found tables. Please; before scaffolding, create table or tables.');
             return false;
         }
+	$found_tables = $found_tables > 0 ? $found_tables : $found_tables2;
 		
         echo PHP_EOL;
 	\Cli::write(str_repeat("=", 50), 'blue');
-        \Cli::write('Found ' . count($found_tables) . ' database tables to generate scaffold for.', 'green');
+        \Cli::write('Found ' . $found_tables . ' database tables to generate scaffold for.', 'green');
 	\Cli::write(str_repeat("=", 50), 'blue');
 	echo PHP_EOL;
         
@@ -34,12 +36,12 @@ trait Scaffold
         }
 		
         echo PHP_EOL;
-		\Cli::write(str_repeat("=", 50), 'red');
-		$answer = \Cli::prompt('Notice: Backup file exists?', array( 'y', 'n' ));
-		\Cli::write(str_repeat("=", 50), 'red');
-		echo PHP_EOL;
+	\Cli::write(str_repeat("=", 50), 'red');
+	$answer = \Cli::prompt('Notice: Backup file exists?', array( 'y', 'n' ));
+	\Cli::write(str_repeat("=", 50), 'red');
+	echo PHP_EOL;
 		
-		$this->backup = ($answer == 'y') ? true : false;
+	$this->backup = ($answer == 'y') ? true : false;
 		
 		
         $this->_create($this->hasmany);
