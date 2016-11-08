@@ -20,7 +20,7 @@ trait Relation
         $code      = array();
         
         foreach ($query as $row) {
-	    $this->table_name[] = $row->TABLE_NAME;
+	    $this->table_name[] = $row['TABLE_NAME'];
             $code[str_replace('_', '', $row['TABLE_NAME'])][$row['REFERENCED_TABLE_NAME']]    = $row['REFERENCED_TABLE_NAME'];
             $hasmany[$row['REFERENCED_TABLE_NAME']][str_replace('_', '', $row['TABLE_NAME'])] = array(
                 'key_from' => $row['REFERENCED_COLUMN_NAME'],
