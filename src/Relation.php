@@ -7,7 +7,8 @@ trait Relation
     
     public $belongsto = array();
     public $hasmany = array();
-	public $example = array();
+    public $example = array();
+    public $table_name = array();
     
     public function relate()
     {
@@ -19,6 +20,7 @@ trait Relation
         $code      = array();
         
         foreach ($query as $row) {
+	    $this->table_name[] = $row->TABLE_NAME;
             $code[str_replace('_', '', $row['TABLE_NAME'])][$row['REFERENCED_TABLE_NAME']]    = $row['REFERENCED_TABLE_NAME'];
             $hasmany[$row['REFERENCED_TABLE_NAME']][str_replace('_', '', $row['TABLE_NAME'])] = array(
                 'key_from' => $row['REFERENCED_COLUMN_NAME'],
@@ -78,10 +80,8 @@ trait Relation
         $normal = array();
         
         foreach ($query as $row) {
-            $table      = str_replace('_', '', $row['TABLE_NAME']);
-            $controller = APPPATH . 'classes' . DS . 'controller' . DS . $table . '.php';
-            $model      = APPPATH . 'classes' . DS . 'model' . DS . $table . '.php';
-            if (!file_exists($controller) && !file_exists($model)) {
+
+            if (!in_array($row['TABLE_NAME'], $this->table_name)) {
                 $normal[$row['TABLE_NAME']] = $row['TABLE_NAME'];
             }
         }
